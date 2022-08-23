@@ -1,10 +1,10 @@
 from hypothesis import given, strategies
 
-from custom_sort.my_sort import my_sort_1, my_sort_2
-from custom_sort.my_sort_broken import my_sort_3, my_sort_4, my_sort_5
+from custom_sort.my_sort import my_sort_1
+from custom_sort.my_sort_broken import my_sort_2, my_sort_3, my_sort_4
 
 
-my_sort = my_sort_2
+my_sort = my_sort_1
 
 @given(sample=strategies.lists(strategies.integers()))
 def test_deterministic(sample):
@@ -40,17 +40,16 @@ def test_pairwise_monotone(sample):
         assert i <= k
 
 
-@given(sample=strategies.lists(strategies.integers()))
-def test_preserves_values(sample):
-    result = list(my_sort(sample))
-    for i in sample:
-        assert i in result
-
-
-@given(sample=strategies.lists(strategies.integers()))
-def test_doesnt_insert_values(sample):
-    result = list(my_sort(sample))
-    for i in result:
-        assert i in sample
-
+# @given(sample=strategies.lists(strategies.integers()))
+# def test_preserves_values(sample):
+#     result = list(my_sort(sample))
+#     for i in sample:
+#         assert i in result
+#
+#
+# @given(sample=strategies.lists(strategies.integers()))
+# def test_doesnt_insert_new_values(sample):
+#     result = list(my_sort(sample))
+#     for i in result:
+#         assert i in sample
 

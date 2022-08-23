@@ -1,9 +1,8 @@
 
 def my_sort_1(sequence):
-    return list(sorted(sequence))
-
-
-def my_sort_2(sequence):
-    return list(sorted(
-        n if isinstance(n, int) else 0 for n in sequence
-    ))
+    if len(sequence) == 0:
+        return sequence
+    pivot, *rest = sequence
+    left = my_sort_1([elem for elem in rest if elem <= pivot])
+    right = my_sort_1([elem for elem in rest if elem > pivot])
+    return left + [pivot] + right

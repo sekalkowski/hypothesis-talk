@@ -1,13 +1,32 @@
 import pytest
 
 from custom_sort.my_sort import my_sort_1
-from custom_sort.my_sort_broken import my_sort_2, my_sort_3
+from custom_sort.my_sort_broken import my_sort_2, my_sort_3, my_sort_4
 
 my_sort = my_sort_1
+# my_sort = my_sort_2  # oh no!
+# my_sort = my_sort_3  # oh damn, please, no!
+# my_sort = my_sort_4  # we'll look at this later ;-)
+
 
 
 def test_my_sort_minimally():
-    assert my_sort([1, 3, 2]) == [1, 2, 3]
+    sample = [1, 3, 2]
+    expected = [1, 2, 3]
+    assert my_sort(sample) == expected
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @pytest.mark.parametrize(("sample", "expected"), [
@@ -19,6 +38,13 @@ def test_my_sort_minimally():
 ])
 def test_my_sort(sample, expected):
     assert my_sort(sample) == expected
+
+
+
+
+
+
+
 
 
 @pytest.mark.parametrize("sample", [

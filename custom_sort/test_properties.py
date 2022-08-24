@@ -5,6 +5,10 @@ from custom_sort.my_sort_broken import my_sort_2, my_sort_3, my_sort_4
 
 
 my_sort = my_sort_1
+# my_sort = my_sort_2  # awww, yeah
+# my_sort = my_sort_3  # wait, what?
+# my_sort = my_sort_4  # oh my...
+
 
 @given(sample=strategies.lists(strategies.integers()))
 def test_deterministic(sample):
@@ -38,6 +42,17 @@ def test_pairwise_monotone(sample):
     result = list(my_sort(sample))
     for i, k in zip(result, result[1:]):
         assert i <= k
+
+
+
+
+
+
+
+
+
+
+
 
 
 # @given(sample=strategies.lists(strategies.integers()))

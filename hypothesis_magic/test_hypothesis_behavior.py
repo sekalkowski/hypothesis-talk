@@ -117,10 +117,14 @@ class Pythonista(pydantic.BaseModel):
 
 class Meetup:
     def __init__(self, already_signed_up):
-        self.signed_up = list(already_signed_up)
+        self._signed_up = list(already_signed_up)
 
     def rsvp(self, member):
-        self.signed_up.append(member)
+        self._signed_up.append(member)
+
+    @property
+    def signed_up(self):
+        return self._signed_up
 
 
 @given(

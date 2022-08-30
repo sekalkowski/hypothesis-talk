@@ -61,7 +61,6 @@ def test_detect_flaky_failures(x, y):
     string_working_day=hypothesis.strategies.dates()
         .filter(lambda d: d.weekday() <= 4)  # only Mon-Fri
         .map(lambda d: d.isoformat())  # we want it as strings
-        .filter(lambda d: "22" not in d)  # because, why not...
 )
 def test_filter_map_strategy(string_working_day):
     assume("9" not in string_working_day)
@@ -79,14 +78,14 @@ def test_filter_map_strategy(string_working_day):
 
 
 
-@given(data=strategies.data())
-def test_interactive_drawing(data):
-    lower_bound = data.draw(strategies.integers(min_value=0, max_value=10))
-    upper_bound = data.draw(strategies.integers(min_value=lower_bound, max_value=10))
-    sample = data.draw(strategies.integers(min_value=lower_bound, max_value=upper_bound))
+@given(interactive_strategy=strategies.data())
+def test_interactive_sampling(interactive_strategy):
+    lower_bound = interactive_strategy.draw(strategies.integers())
+    upper_bound = interactive_strategy.draw(strategies.integers(min_value=lower_bound))
+    in_between = interactive_strategy.draw(strategies.integers(min_value=lower_bound, max_value=upper_bound))
 
-    print(lower_bound, sample, upper_bound)
-    assert lower_bound <= sample <= upper_bound
+    print(lower_bound, in_between, upper_bound)
+    assert lower_bound <= in_between <= upper_bound
 
 
 
@@ -104,15 +103,16 @@ class Skills(enum.Enum):
     pydantic = 1
     pytest = 2
     hypothesis = 3
-    asyncio = 4
-    magical_meta_programming = 5
+    static_code_analysis = 4
+    asyncio = 5
+    magical_meta_programming = 6
 
 
 class Pythonista(pydantic.BaseModel):
     id: uuid.UUID
     name: str
     age: Optional[int] = Field(..., gt=0, lt=200)
-    skills: Set[Skills]
+    skills: Set[Skills] = Field(description="Very particular set of skills")
 
 
 class Meetup:
@@ -123,8 +123,8 @@ class Meetup:
         self._signed_up.append(member)
 
     @property
-    def signed_up(self):
-        return self._signed_up
+    def reservations(self) -> int:
+        return len(self._signed_up)
 
 
 @given(
@@ -132,10 +132,10 @@ class Meetup:
     initial_visitors=strategies.lists(strategies.from_type(Pythonista)),
 )
 def test_draw_from_models(initial_visitors, someone):
-    assume(someone not in initial_visitors)
     meetup = Meetup(initial_visitors)
+    before = meetup.reservations
 
     print(someone)
     meetup.rsvp(someone)
 
-    assert someone in meetup.signed_up
+    assert meetup.reservations == before + 1

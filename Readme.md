@@ -29,4 +29,4 @@ This talk will explore:
 - [Hypothesis Docs](https://hypothesis.readthedocs.io/)
 - [Quickstart Guide](https://hypothesis.readthedocs.io/en/latest/quickstart.html)
 - VOD recordings:
-  - TBD...
+  - https://youtu.be/iAzOcf1VC1A

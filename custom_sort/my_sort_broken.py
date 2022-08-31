@@ -28,24 +28,3 @@ def my_sort_3(sequence):
         return []
     start = min(sequence)
     return list(range(start, start + len(sequence)))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def my_sort_4(sequence):
-    """ get a list of all-0s of the same length """
-    return [0] * len(sequence)

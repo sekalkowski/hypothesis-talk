@@ -1,12 +1,12 @@
 import enum
 import time
 import uuid
-from typing import Optional, List, Set
+from typing import Optional, Set
 
 import hypothesis.strategies
 import pydantic
 from hypothesis import strategies, given, assume
-from pydantic import BaseModel, Field
+from pydantic import Field
 
 
 @given(

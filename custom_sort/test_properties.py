@@ -1,13 +1,12 @@
 from hypothesis import given, strategies
 
 from custom_sort.my_sort import my_sort_1
-from custom_sort.my_sort_broken import my_sort_2, my_sort_3, my_sort_4
+from custom_sort.my_sort_broken import my_sort_2, my_sort_3
 
 
 my_sort = my_sort_1
 # my_sort = my_sort_2  # awww, yeah
 # my_sort = my_sort_3  # wait, what?
-# my_sort = my_sort_4  # oh my...
 
 
 @given(sample=strategies.lists(strategies.integers()))

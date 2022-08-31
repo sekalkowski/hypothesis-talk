@@ -1,12 +1,11 @@
 import pytest
 
 from custom_sort.my_sort import my_sort_1
-from custom_sort.my_sort_broken import my_sort_2, my_sort_3, my_sort_4
+from custom_sort.my_sort_broken import my_sort_2, my_sort_3
 
 my_sort = my_sort_1
 # my_sort = my_sort_2  # oh no!
 # my_sort = my_sort_3  # oh damn, please, no!
-# my_sort = my_sort_4  # we'll look at this later ;-)
 
 
 
